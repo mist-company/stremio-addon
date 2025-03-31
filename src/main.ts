@@ -1,13 +1,16 @@
 import { addonBuilder, Manifest, Args, Stream, serveHTTP } from 'stremio-addon-sdk';
-import { Title } from './title';
-import { MongoHelper } from './mongo';
+import { Torrent } from './torrent';
+import { DBHelper } from './db';
 import { prettyBytes, prettyResolution, prettySeeds } from './utils';
+import { ADDON_ID, ADDON_NAME, IS_PRODUCTION_ENV } from './config';
 
+const id = IS_PRODUCTION_ENV ? ADDON_ID : `${ADDON_ID}.dev`;
+const name = IS_PRODUCTION_ENV ? ADDON_NAME : `${ADDON_NAME} (dev)`;
 const manifest: Manifest = {
-  id: 'org.zimba.mist-company',
+  id,
+  name,
+  description: 'Zimba is a torrent streaming service',
   version: '0.1.0',
-  name: 'Zimba',
-  description: 'Zimba',
   resources: ['stream'],
   types: ['movie'],
   idPrefixes: ['tt'],
@@ -15,25 +18,21 @@ const manifest: Manifest = {
 };
 
 const builder = new addonBuilder(manifest);
-const db = new MongoHelper();
+const db = new DBHelper();
 
 builder.defineStreamHandler(async (args: Args) => {
   if (args.type === 'movie') {
     console.log('Requesting streams for', args.id);
-    const collection = await db.getCollection('catalog', 'titles');
-    const title = await collection.findOne<Title>({ imdbId: args.id, torrents: { $exists: true, $ne: null } });
-    if (!title) {
-      console.log('Title not found', args.id);
-      return { streams: [] };
-    }
-    const streams: Stream[] = title.torrents.map<Stream>((torrent) => ({
+    const collection = await db.getCollection('torrents');
+    const torrents = await collection.find<Torrent>({ titleId: args.id }).toArray();
+    const streams: Stream[] = torrents.map<Stream>((torrent) => ({
       type: 'movie',
       name: `Torrent`,
       title: [
-        `📺 ${prettyResolution(torrent.quality)} ${torrent.type.toUpperCase()}`,
-        `${prettySeeds(torrent.seeds)} | 💾 ${prettyBytes(torrent.size)}`,
+        `📺 ${prettyResolution(torrent.quality)} ${torrent.ripType.toUpperCase()}`,
+        `${prettySeeds(torrent.seeds)} | 💾 ${prettyBytes(torrent.sizeBytes)}`,
       ].join('\n'),
-      infoHash: torrent.hash.toLowerCase(),
+      infoHash: torrent.infoHash.toLowerCase(),
     }));
     console.log(`Found ${streams.length} streams for`, args.id);
     return { streams };
