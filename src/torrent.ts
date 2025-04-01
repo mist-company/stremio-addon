@@ -1,13 +1,10 @@
 export interface Torrent {
-  _id: string;
-  titleId: string;
+  imdbId: string;
+  title: string;
+  tracker: string;
   infoHash: string;
-  quality: string;
-  ripType: string;
-  url: string;
+  magnetUri: string;
   sizeBytes: number;
   seeds: number;
   peers: number;
-  videoCodec: string;
-  audioChannels: string;
 }
