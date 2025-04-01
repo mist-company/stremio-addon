@@ -1,8 +1,9 @@
 import { addonBuilder, Manifest, Args, Stream, serveHTTP } from 'stremio-addon-sdk';
 import { Torrent } from './torrent';
-import { DBHelper } from './db';
-import { prettyBytes, prettyResolution, prettySeeds } from './utils';
-import { ADDON_ID, ADDON_NAME, IS_PRODUCTION_ENV } from './config';
+import { DBHelper } from './utils/db';
+import { prettyBytes, prettyResolution, prettySeeds } from './utils/utils';
+import { ADDON_ID, ADDON_NAME, FIND_TORRENT_JOB_NAME, IS_PRODUCTION_ENV } from './utils/config';
+import { queue } from './utils/queue';
 
 const id = IS_PRODUCTION_ENV ? ADDON_ID : `${ADDON_ID}.dev`;
 const name = IS_PRODUCTION_ENV ? ADDON_NAME : `${ADDON_NAME} (dev)`;
@@ -34,6 +35,7 @@ builder.defineStreamHandler(async (args: Args) => {
       ].join('\n'),
       infoHash: torrent.infoHash.toLowerCase(),
     }));
+    await queue.add(FIND_TORRENT_JOB_NAME, { imdbId: args.id }, { deduplication: { id: args.id } });
     console.log(`Found ${streams.length} streams for`, args.id);
     return { streams };
   } else {
