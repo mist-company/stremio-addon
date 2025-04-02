@@ -1,5 +1,5 @@
-import { Stream } from 'stremio-addon-sdk';
-import { Torrent } from '../torrent';
+import { Stream } from '../dto/stream';
+import { Torrent } from '../dto/torrent';
 
 export function prettyBytes(num: number): string {
   const units = ['B', 'KB', 'MB', 'GB', 'TB'];
