@@ -1,7 +1,5 @@
-import { addonBuilder, Manifest, Args, Stream, serveHTTP } from 'stremio-addon-sdk';
+import { Args, Manifest, Stream, addonBuilder, serveHTTP } from 'stremio-addon-sdk';
 import { Torrent } from './torrent';
-import { DBHelper } from './utils/db';
-import { parseTorrentToStream } from './utils/utils';
 import {
   ADDON_ID,
   ADDON_NAME,
@@ -9,7 +7,9 @@ import {
   FIND_TORRENT_JOB_NAME,
   IS_PRODUCTION_ENV,
 } from './utils/config';
+import { DBHelper } from './utils/db';
 import { queue } from './utils/queue';
+import { parseTorrentToStream } from './utils/utils';
 
 const id = IS_PRODUCTION_ENV ? ADDON_ID : `${ADDON_ID}.dev`;
 const name = IS_PRODUCTION_ENV ? ADDON_NAME : `${ADDON_NAME} (dev)`;
@@ -46,7 +46,7 @@ builder.defineStreamHandler(async (args: Args) => {
     return { streams: [] };
   }
   const data = (await request.json()) as Torrent[];
-  console.log(`found ${data.length} torrents for ${args.id}`);
+  console.log(`found ${data.length} torrents on jackett for ${args.id}`);
   return { streams: data.map(parseTorrentToStream) };
 });
 
