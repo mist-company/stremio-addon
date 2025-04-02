@@ -23,7 +23,7 @@ const manifest: Manifest = {
   idPrefixes: ['tt'],
   catalogs: [],
   logo: 'https://www.stremio.com/website/stremio-logo-small.png',
-  background: 'https://cdn.pixabay.com/photo/2017/11/24/10/43/ticket-2974645_1280.jpg',
+  background: 'https://www.stremio.com/website/header-mask.png',
 };
 
 const builder = new addonBuilder(manifest);
@@ -37,6 +37,7 @@ builder.defineStreamHandler(async (args: Args) => {
     const streams: Stream[] = torrents.map(parseTorrentToStream);
     await queue.add(FIND_TORRENT_JOB_NAME, { imdbId: args.id }, { deduplication: { id: args.id } });
     console.log(`found ${streams.length} streams for`, args.id);
+    return { streams };
   }
   console.log(`no torrents found in database for ${args.id}`);
   const request = await fetch(new URL(`api/torrents/${args.id}`, CATALOG_ENRICHMENT_API_URL).toString());
