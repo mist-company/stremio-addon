@@ -17,7 +17,8 @@ USER node
 
 FROM node:${NODE_VERSION}-alpine AS production
 WORKDIR /usr/src/app
-ENV NODE_ENV production
+ENV NODE_ENV=production
+COPY --chown=node:node package.json ./
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 COPY --chown=node:node --from=build /usr/src/app/view ./view

@@ -9,6 +9,7 @@
     "test": "vitest run --coverage",
     "test:watch": "vitest --watch",
     "release": "standard-version",
+    "postrelease": "git push --follow-tags origin main && npm publish",
     "prepare": "husky || true"
   },
   "author": "",
