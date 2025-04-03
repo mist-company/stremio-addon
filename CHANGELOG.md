@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.3](https://github.com/mist-company/stremio-addon/compare/v0.2.2...v0.2.3) (2025-04-03)
+
+
+### 🐛 Bug Fixes
+
+* home page version tag ([15b8ad9](https://github.com/mist-company/stremio-addon/commit/15b8ad905c854c7d78ff2f4b684d06b34dc31364))
+* home page version tag ([8a5e104](https://github.com/mist-company/stremio-addon/commit/8a5e104663c3de54195e7444d17474942d8bb56c))
+
 ### 0.2.2 (2025-04-03)
 
 
