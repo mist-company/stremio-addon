@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { DB_NAME, DB_URL } from './config';
+import { DB_NAME, DB_URL } from '../utils/config';
 
 export class DBHelper {
   private readonly client: MongoClient;
@@ -10,11 +10,14 @@ export class DBHelper {
   }
 
   async getCollection(collectionName: string) {
+    return this.client.db(DB_NAME).collection(collectionName);
+  }
+
+  async connect() {
     if (!this.isConnected) {
       await this.client.connect();
       this.isConnected = true;
     }
-    return this.client.db(DB_NAME).collection(collectionName);
   }
 
   async disconnect() {

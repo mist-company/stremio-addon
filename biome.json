@@ -96,6 +96,9 @@
       "attributePosition": "auto",
       "bracketSpacing": true
     },
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    },
     "globals": ["exports"]
   },
   "overrides": [

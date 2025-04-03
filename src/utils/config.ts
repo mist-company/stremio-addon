@@ -9,3 +9,15 @@ export const CATALOG_ENRICHMENT_API_URL = process.env.CATALOG_ENRICHMENT_API_URL
 export const FIND_TORRENT_JOB_NAME = process.env.FIND_TORRENT_JOB_NAME ?? 'find-torrent-job-local';
 export const CATALOG_ENRICHMENT_QUEUE_NAME =
   process.env.CATALOG_ENRICHMENT_QUEUE_NAME ?? 'catalog-enrichment-queue-local';
+
+export const MANIFEST = {
+  id: IS_PRODUCTION_ENV ? ADDON_ID : `${ADDON_ID}.dev`,
+  name: IS_PRODUCTION_ENV ? ADDON_NAME : `${ADDON_NAME} (dev)`,
+  description: 'ZMB - Stremio addon for torrent streaming',
+  version: process.env.npm_package_version,
+  resources: ['stream'],
+  types: ['movie', 'series'],
+  idPrefixes: ['tt'],
+  catalogs: [],
+  logo: 'https://www.stremio.com/website/stremio-logo-small.png',
+};
