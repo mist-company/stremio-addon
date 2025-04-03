@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.4](https://github.com/mist-company/stremio-addon/compare/v0.2.3...v0.2.4) (2025-04-03)
+
+
+### 🚚 Chores
+
+* change addon name ([cc660b9](https://github.com/mist-company/stremio-addon/commit/cc660b91ae2d0c033aaa3c0e35c8f78ae10fc8d7))
+
 ### [0.2.3](https://github.com/mist-company/stremio-addon/compare/v0.2.2...v0.2.3) (2025-04-03)
 
 
