@@ -1,4 +1,3 @@
-import { injectable, inject } from 'tsyringe';
 import { Torrent } from '../dto/torrent';
 
 export type BaseTorrentSearchInput = {

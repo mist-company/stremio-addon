@@ -1,6 +1,6 @@
 import { Queue } from 'bullmq';
 import { CATALOG_ENRICHMENT_QUEUE_NAME } from '../utils/config';
-const crypto = require('crypto');
+import crypto from 'crypto';
 
 export type QueueHelperOptions = {
   enableDeduplication?: boolean;

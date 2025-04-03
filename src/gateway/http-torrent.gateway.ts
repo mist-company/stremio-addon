@@ -1,7 +1,6 @@
-import { MongoClient } from 'mongodb';
 import { Torrent } from '../dto/torrent';
 import { BaseTorrentGateway, BaseTorrentSearchInput } from './base-torrent.gateway';
-import { injectable, inject } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { CATALOG_ENRICHMENT_API_URL } from '../utils/config';
 
 @injectable()
