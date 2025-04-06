@@ -33,7 +33,7 @@ app.get('/stream/:type/:id.json', async (req, res) => {
     const args = req.params;
     console.log(`requesting streams for ${args.type} ${args.id}`);
     const torrents = await searchTorrentsUseCase.execute({ imdbId: args.id });
-    const streams: Stream[] = torrents.map(parseTorrentToStream);
+    const streams: Stream[] = torrents.sort((a, b) => b.seeds - a.seeds).map(parseTorrentToStream);
     res.json({ streams });
   } catch (error) {
     console.error(`Error fetching torrents: ${error}`);
