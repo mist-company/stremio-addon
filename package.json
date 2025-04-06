@@ -1,6 +1,6 @@
 {
   "name": "stremio-addon",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "main": "dist/main.js",
   "scripts": {
     "start": "node dist/main.js",

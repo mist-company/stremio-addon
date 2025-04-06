@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.5](https://github.com/mist-company/stremio-addon/compare/v0.2.4...v0.2.5) (2025-04-06)
+
+
+### ♻️ Code Refactoring
+
+* improve stream info ([b6aba44](https://github.com/mist-company/stremio-addon/commit/b6aba4434884f7f3c41971aff5327fd167eaa6f9))
+
 ### [0.2.4](https://github.com/mist-company/stremio-addon/compare/v0.2.3...v0.2.4) (2025-04-03)
 
 
